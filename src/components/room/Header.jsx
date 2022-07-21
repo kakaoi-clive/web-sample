@@ -28,6 +28,8 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
     conf.disconnect();
 
     setConf(null);
+
+    ConnectLive.signOut();
     navigate('/');
   }
 

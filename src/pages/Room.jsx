@@ -8,12 +8,12 @@ import RemoteVideo from '../components/room/RemoteVideo';
 import { useRecoilState } from 'recoil';
 import { CameraDeviceId } from '@/store/cameraDevice';
 import { MicDeviceId } from '@/store/micDevice';
-import { RoomNameState } from '@/store/roomNameState';
 import { MicDeviceActive } from '@/store/micDeviceActive';
 import { CameraDeviceActive } from '@/store/cameraDeviceActive';
 import { Conf } from '@/store/conf';
 import { LocalAudio } from '@/store/localAudio';
 import { LocalVideo } from '@/store/localVideo';
+import { LocalScreen } from '@/store/localScreen';
 import { AudioOccupants } from '@/store/audioOccupants';
 import { AlwaysOnAudio } from '@/store/alwaysOnAudio';
 
@@ -21,7 +21,6 @@ const Robby = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  const [roomName] = useRecoilState(RoomNameState);
   const [activeMic] = useRecoilState(MicDeviceActive);
   const [activeCamera] = useRecoilState(CameraDeviceActive);
 
@@ -34,9 +33,10 @@ const Robby = () => {
   const [cameraDeviceId] = useRecoilState(CameraDeviceId);
   const [micDeviceId] = useRecoilState(MicDeviceId);
 
-  const [conf] = useRecoilState(Conf);
+  const [conf, setConf] = useRecoilState(Conf);
   const [localAudio, setLocalAudio] = useRecoilState(LocalAudio);
   const [localVideo, setLocalVideo] = useRecoilState(LocalVideo);
+  const [localScreen, setLocalScreen] = useRecoilState(LocalScreen);
 
   const [audioOccupants, setAudioOccupants] = useRecoilState(AudioOccupants);
   const [alwaysOnAudio, setAlwaysOnAudio] = useRecoilState(AlwaysOnAudio);
@@ -90,27 +90,6 @@ const Robby = () => {
         _localVideo.video.setExtraValue('camera');
         setLocalVideo(_localVideo);
       }
-/*
-      _conf.on('connected', async (evt)=>{
-        evt.remoteParticipants.forEach(async participant => {
-          const unsubscribedVideos = participant.getUnsubscribedVideos();
-          if (unsubscribedVideos.length) {
-            const videoIds = unsubscribedVideos.map(video => video.getVideoId());
-            setRemoteParticipantVideos(oldRemoteParticipantVideos => [...oldRemoteParticipantVideos, ...videoIds]);
-          }
-
-          Object.values(_conf.audioOccupants).forEach((audio)=>{
-            setAudioOccupants(oldAudioOccupants => {
-              const o = { ...oldAudioOccupants };
-              o[audio.id] = true;
-              return o;
-            });
-          });
-  
-          setRemoteParticipants(oldRemoteParticipants => [...oldRemoteParticipants, participant]);
-        });
-      });
-*/
 
       _conf.on('participantEntered', (evt)=>{
         setRemoteParticipants(oldRemoteParticipants => [...oldRemoteParticipants, evt.remoteParticipant]);
@@ -168,6 +147,19 @@ const Robby = () => {
           setAlwaysOnAudio(evt.remoteParticipant);
         } else {
           setAlwaysOnAudio({});
+        }
+      });
+
+      _conf.on('disconnected', (reason)=>{
+        if(reason === 'destroyed' || reason === 'kicked') {
+          setLocalAudio(null);
+          setLocalVideo(null);
+          setLocalScreen(null);
+
+          setConf(null);
+
+          ConnectLive.signOut();
+          navigate('/');
         }
       });
 
