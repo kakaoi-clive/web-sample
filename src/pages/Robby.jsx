@@ -67,7 +67,7 @@ const Robby = () => {
     }
 
     await ConnectLive.signIn(auth);
-    const _conf = ConnectLive.createConference();
+    const _conf = ConnectLive.createRoom();
     _conf.on('connecting', async (evt)=>{
       const progress = Math.floor(evt.progress);
       if(progress <= 33) {
