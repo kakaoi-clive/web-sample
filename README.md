@@ -141,15 +141,15 @@ localMedia.video.setHd(true);
 
 
 ### **화상회의**
-화상회의 서비스를 위해서는 ConnectLive.createConference()를 통해 화상회의 객체를 선언합니다.
+화상회의 서비스를 위해서는 ConnectLive.createRoom()를 통해 화상회의 객체를 선언합니다.
 
 ```
-const conf = ConnectLive.createConference({
+const conf = ConnectLive.createRoom({
     //options
 });
 ```
 
-이 때 옵션을 넘길 수 있습니다. createConference가 취하는 옵션은 다음과 같습니다.
+이 때 옵션을 넘길 수 있습니다. createRoom가 취하는 옵션은 다음과 같습니다.
 
 |**이름**|**기본값**|**설명**|
 | :-: | :-: | :-: |
