@@ -451,6 +451,6 @@ conf.on('error', ()=>{
 | remoteAudioUnsubscribe | remoteParticipant: RemoteParticipant, remoteAudio: RemoteAudio | 점유하고 있던 오디오가 해제되면 호출되는 이벤트 이다. 해당 사용자가 말을 하지 않고 있다는 것을 의미한다. |
 | remoteAudioStateChanged | remoteParticipant: RemoteParticipant, remoteAudio: RemoteAudio | 다른 참여자의 오디오의 상태 alwaysOn 또는 enabled가 변경되면 호출됩니다. alwaysOn이란, 오디오를 계속적으로 점유해서 나의 오디오가 항시 전달되도록 하는 기능입니다. LocalAudiod의 setAlwaysOn 메소드로 이를 설정할 수 있습니다. enabled을 false로 설정할 경우, 오디오를 잠시 mute 결과를 얻을 수 있습니다. LocalAudio의 setEnabled 메소드로 이를 설정할 수 있습니다. |
 | remoteVideoStateChanged | remoteParticipant: RemoteParticipant, remoteVideo: RemoteVideo | 다른 참여자의 비디오 상태 곧 enabled 상태가 변경되면 호출됩니다. enabled을 false로 설정할 경우, 비디오를 잠시 mute 결과를 얻을 수 있습니다. LocalVideo의 setEnabled 메소드로 이를 설정할 수 있습니다. |
-| disconnected |  | 컨퍼런스 룸에서 정상적으로 나오면 호출되는 이벤트. |
-| error | 에러(ServerError, ClientError) | 미디어서버와의 연결이 실패했을 경우, 호출됩니다. 해당 에러 이벤트에서 초기화면으로 이동한다든가 하는 행위가 필요합니다. |
+| disconnected | reason | 컨퍼런스 룸에서 정상적으로 나오면 호출되는 이벤트. reason이 'disconnected'인 경우 정상 종료. 'destroyed'인 경우 강제 종료. 'kicked'인 경우 강제 퇴장입니다. |
+| error | 에러(ServerError, ClientError) | 최종 연결이 실패했을 경우, 호출됩니다. 해당 에러 이벤트에서 초기화면으로 이동한다든가 하는 행위가 필요합니다. |
 | userMessage | sender: RemoteParticipantId, message: string |  |
