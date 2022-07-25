@@ -126,10 +126,10 @@ await localMedia.switchMic('디바이스아이디');
 ```
 
 ### **스피커 장치 변경하기**
-switchSpeaker 상대방의 오디오를 재생 중인 스피커를 변경할 수 있습니다. 예를 들어 전면 노트북 스피커에서 이어폰으로 변경할 수 있습니다. switchSpeaker 메서드는 localMedia가 아닌 conference 객체에서 제공함을 유의해주세요.
+switchSpeaker 상대방의 오디오를 재생 중인 스피커를 변경할 수 있습니다. 예를 들어 전면 노트북 스피커에서 이어폰으로 변경할 수 있습니다. switchSpeaker 메서드는 localMedia가 아닌 room 객체에서 제공함을 유의해주세요.
 
 ```
-await conf.switchSpeaker('디바이스아이디');
+await room.switchSpeaker('디바이스아이디');
 ```
 
 
@@ -144,7 +144,7 @@ localMedia.video.setHd(true);
 화상회의 서비스를 위해서는 ConnectLive.createRoom()를 통해 화상회의 객체를 선언합니다.
 
 ```
-const conf = ConnectLive.createRoom({
+const room = ConnectLive.createRoom({
     //options
 });
 ```
@@ -162,14 +162,14 @@ const conf = ConnectLive.createRoom({
 자신의 미디어를 공유하려면 publish API를 사용합니다. 다음과 같이 로컬 미디어 객체를 publish API의 인자로 전달하기만 하면 됩니다.
 
 ```
-await conf.publish([ localMedia ]);
+await room.publish([ localMedia ]);
 ```
 
 ### **미디어 구독하기**
 상대방의 비디오를 구독하려면 subscribe API를 사용합니다. 
 
 ```
-const remoteVideos = await conf.subscribe([videoId]);
+const remoteVideos = await room.subscribe([videoId]);
 
 const video = remoteVideos[0].attach();
 document.querySelector('.remote-container').appendChild(video);
@@ -180,11 +180,11 @@ document.querySelector('.remote-container').appendChild(video);
 비디오 아이디는 참여자 객체의 getUnsubscribedVideos()를 통해 알 수 있습니다. 이는 참여자의 현재 구독중이지 않은 리모트 비디오 배열을 반환합니다. 
 
 ```
-conf.on('connected', (e)=>{
+room.on('connected', (e)=>{
     //기존 참여자 배열을 순회하며 비디오 구독 및 엘리먼트 생성
     e.participants.forEach(async (participant) => {
         const unsubscribedVideos = participant.getUnsubscribedVideos();
-        const remoteVideos = await conf.subscribe([unsubscribedVideos[0].videoId]);
+        const remoteVideos = await room.subscribe([unsubscribedVideos[0].videoId]);
         const video = remoteVideos[0].attach();
         document.querySelector('.remote-container').appendChild(video);
     });
@@ -192,8 +192,8 @@ conf.on('connected', (e)=>{
 ```
 
 ```
-conf.on('remoteVideoPublished', (e)=>{
-    const remoteVideos = await conf.subscribe([e.remoteVideo.videoId]);
+room.on('remoteVideoPublished', (e)=>{
+    const remoteVideos = await room.subscribe([e.remoteVideo.videoId]);
     const remoteVideo = remoteVideos[0].attach();
     document.querySelector('.remote-container').appendChild(remoteVideo);
 });
@@ -203,13 +203,13 @@ conf.on('remoteVideoPublished', (e)=>{
 자신의 비디오 공유를 해제하려면 unpublish API를 사용합니다. 공유과 마찬가지로 로컬 비디오 배열 객체를 받습니다.
 
 ```
-await conf.unpublish([ localMedia ]);
+await room.unpublish([ localMedia ]);
 ```
 
 상대방이 자신의 비디오를 공유해제했다면 이는 remoteVideoUnpublished이벤트로 연결됩니다. 해당 이벤트 내에서 상대방의 비디오를 제거합니다.
 
 ```
-conf.on('remoteVideoUnpublished', (evt)=>{
+room.on('remoteVideoUnpublished', (evt)=>{
     evt.remoteVideo.detach();
 });
 ```
@@ -218,29 +218,29 @@ conf.on('remoteVideoUnpublished', (evt)=>{
 상대방의 비디오 구독을 해제하려면 unsubscribe API를 사용합니다. 구독과 마찬가지로 비디오 아이디를 받습니다.
 
 ```
-await conf.unsubscribe([videoId]);
+await room.unsubscribe([videoId]);
 ```
 
 ### **오디오를 점유하고 있는 참여자 알아내기**
 ConnectLive 화상회의는 오디오를 최대 4개까지만 제공하고 있습니다. 이는 곧 오디오를 점유하고 있는 참여자의 오디오를 4개까지만 재생한다는 것입니다. 그 이상의 오디오 재생은 혼란을 증가 시켜 실제 알아들을 수 없는 대화가 됩니다. 오디오를 점유하고 있다고 해서 실제로 말을 하고 있다는 뜻은 아닙니다. 오디오를 점유하지만 해당 참여자도, 다른 참여자도 모두 말을 하고 있지 않다면. 오디오 점유는 그대로 유지됩니다.
 
 
-오디오 점유자는 conf.audioOccupants를 통해 알 수 있으며, 점유자가 변경되었다는 것은 remoteAudioSubscribe와 remoteAudioUnsubscribe이벤트로 알 수 있습니다.
+오디오 점유자는 room.audioOccupants를 통해 알 수 있으며, 점유자가 변경되었다는 것은 remoteAudioSubscribe와 remoteAudioUnsubscribe이벤트로 알 수 있습니다.
 ```
 // 현재 오디오 점유자 배열 반환
-conf.audioOccupants
+room.audioOccupants
 ```
 
 ```
 //참여자가 오디오를 점유했을때
-conf.on(‘remoteAudioSubscribed’, evt => {
+room.on(‘remoteAudioSubscribed’, evt => {
     evt.participant
 });
 ```
 
 ```
 //참여자가 오디오 점유를 잃었을때
-conf.on(‘remoteAudioUnsubscribed’, evt => {
+room.on(‘remoteAudioUnsubscribed’, evt => {
     evt.participant
 });
 ```
@@ -249,7 +249,7 @@ conf.on(‘remoteAudioUnsubscribed’, evt => {
 오디오를 점유하고 있는 참여자와는 별도로 각 참여자의 오디오 레벨을 가져올 수 있습니다. 오디오 레벨을 통해 실제 말하고 있는 참여자에 대한 표시를 할 수 있습니다. 아래 메서드를 주기적으로 호출해 오디오 레벨을 가져옵니다.
 
 ```
-conf.getRemoteAudioLevels();
+room.getRemoteAudioLevels();
 \*
 {
     remoteParticipants: [{
@@ -281,7 +281,7 @@ const localScreen = await ConnectLive.createLocalScreen({
 });
 
 // 생성한 미디어는 localMedia와 동일하게 publish로 공유할 수 있습니다.
-await conf.publish( [ localScreen ] );
+await room.publish( [ localScreen ] );
 ```
 화면 공유용 객체 선언시 audio옵션을 줄 수 있습니다. 이 경우, 공유한 크롭 탭에서 현재 오디오가 재생되고 있다면 해당 오디오까지 공유되어집니다.
 
@@ -297,13 +297,13 @@ localScreen.video.setExtraValue('screen');
 이제 상대방이 공유한 화면 공유 비디오를 구독해야 합니다. 구독은 역시 connected이벤트와 remoteVideoPublished이벤트와 subscribe API를 그대로 이용합니다.
 
 ```
-conf.on('connected', (evt)=>{
+room.on('connected', (evt)=>{
     //기존 참여자 배열을 순회하며 비디오 구독 및 엘리먼트 생성
     evt.participants.forEach(async (participant) => {
         const unsubscribeRemoteVideos= participant.getUnsubscribeVideos();
         if(unsubscribeRemoteVideos[0].extraValue === 'screen') {
             //화면 공유
-            const remoteVideos = await conf.subscribe([unsubscribeRemoteVideos[0].videoId]);
+            const remoteVideos = await room.subscribe([unsubscribeRemoteVideos[0].videoId]);
         } else {
             //일반 비디오
         }
@@ -312,10 +312,10 @@ conf.on('connected', (evt)=>{
 ```
 
 ```
-conf.on('remoteVideoPublished', (evt)=>{
+room.on('remoteVideoPublished', (evt)=>{
     if(evt.remoteVideo.extraValue === 'screen') {
         //화면 공유
-        const remoteVideos = await conf.subscribe([evt.remoteVideo.videoId]);
+        const remoteVideos = await room.subscribe([evt.remoteVideo.videoId]);
     } else {
         //일반 비디오
     }
@@ -325,13 +325,13 @@ conf.on('remoteVideoPublished', (evt)=>{
 ### **녹화하기**
 ConnectLive는 본인의 화면을 녹화할 수 있습니다. 기본 사용 방법은 아래와 같습니다.
 ```
-await conf.publish(([localMedia], true);
+await room.publish(([localMedia], true);
 ```
 위와 같이 publish 메서드의 두번째 인자를 true로 지정합니다. 만약 이미 local media를 publish하고 있다면 unpublish후 publish를 다시 진행합니다.
 ```
-await this.conf.unpublish([this.localMedia]);
+await room.unpublish([localMedia]);
 
-await this.conf.publish([this.localMedia], true);
+await room.publish([localMedia], true);
 ```
 녹화 결과는 웹훅으로 전달됩니다.
 
@@ -395,7 +395,7 @@ try{
 ```
 //await 사용시
 try{
-    await conf.connect('룸 아이디');
+    await room.connect('룸 아이디');
 } catch () {
     //에러 처리
 }
@@ -405,7 +405,7 @@ try{
 ```
 //await 사용시
 try{
-    await conf.publish( [localMedia] );
+    await room.publish( [localMedia] );
 } catch (err) {
     //에러 처리
 }
@@ -415,7 +415,7 @@ try{
 ```
 //await 사용시
 try{
-    await this.conf.subscribe(비디오아이디배열);
+    await room.subscribe(비디오아이디배열);
 } catch (err) {
     //에러 처리
 }
@@ -425,9 +425,9 @@ try{
 ConnectLive는 미디어 서버와 클라이언트가 p2p로 연결되어 오디오와 비디오를 송수신 합니다. 이때 p2p로 연결된 미디어 서버와의 네트워크 상황 등에 의해 연결을 실패할 수 있습니다. 이러한 상황에 대응할 수 있도록 화상 회의 객체에 error 콜백을 등록할 수 있습니다. 해당 이벤트 안에서 disconnect를 호출하고 초기 화면으로 이동한다 등의 에러 처리가 필요합니다.
 
 ```
-conf.on('error', ()=>{
+room.on('error', ()=>{
     //에러 처리
-    conf.disconnect();
+    room.disconnect();
 });
 ```
 
