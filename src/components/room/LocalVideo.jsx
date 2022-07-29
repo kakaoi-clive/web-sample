@@ -43,7 +43,7 @@ const LocalScreenComp = () => {
             handleStop();
           }}
         >
-          <img src="/icons/screenShareStop.svg" />
+          <img src="./icons/screenShareStop.svg" />
         </button>
       </div>
     </div>
@@ -175,18 +175,18 @@ const LocalVideoComp = ({ showModal, setShowModal }) => {
           <button
             onClick={handleEnabledAudio}
           >
-            {audioEnabled ? <img src="/icons/mic.svg" /> : <img src="/icons/micDisabled.svg" />}
+            {audioEnabled ? <img src="./icons/mic.svg" /> : <img src="./icons/micDisabled.svg" />}
           </button>
           <button
             onClick={handleEnabledVideo}
           >
-            {videoEnabled ? <img src="/icons/camera.svg" /> : <img src="/icons/cameraDisabled.svg" />}
+            {videoEnabled ? <img src="./icons/camera.svg" /> : <img src="./icons/cameraDisabled.svg" />}
           </button>
           {!localScreen && (
             <button
               onClick={onClickScreenShareStart}
             >
-              <img src="/icons/screenShare.svg" />
+              <img src="./icons/screenShare.svg" />
             </button>
           )}
 

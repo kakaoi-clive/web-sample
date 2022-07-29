@@ -44,7 +44,7 @@ ConnectLive의 기능을 활용한 화상회의 예제입니다.
 npm install && npm run dev
 ```
 
-http://localhost:3000 으로 실행 가능합니다.
+http://localhost:3000/web-sample 으로 실행 가능합니다.
 
 
 # API

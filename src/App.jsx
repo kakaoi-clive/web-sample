@@ -11,7 +11,7 @@ ConnectLive.logger.setLevel('off');
 const App = () => {
   return (
     <RecoilRoot>
-      <BrowserRouter>
+      <BrowserRouter basename="/web-sample">
         <Routes>
           <Route path='/' element={<DefaultLayout />}>
             <Route path='/' element={<Lobby />} />

@@ -104,14 +104,14 @@ const Lobby = () => {
                 setActiveMic(!activeMic);
               }}
             >
-              {activeMic ? <img src="/icons/mic.svg" /> : <img src="/icons/micDisabled.svg" />}
+              {activeMic ? <img src="./icons/mic.svg" /> : <img src="./icons/micDisabled.svg" />}
             </button>
             <button
               onClick={() => {
                 setActiveCamera(!activeCamera);
               }}
             >
-              {activeCamera ? <img src="/icons/camera.svg" /> : <img src="/icons/cameraDisabled.svg" />}
+              {activeCamera ? <img src="./icons/camera.svg" /> : <img src="./icons/cameraDisabled.svg" />}
             </button>
           </div>
         </div>
