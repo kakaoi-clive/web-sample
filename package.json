@@ -2,7 +2,7 @@
   "name": "icl2-web-sample",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://pages.github.kakaoenterprise.in/icl/icl2-web-sample/",
+  "homepage": "https://kakaoi-clive.github.io/web-sample/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
