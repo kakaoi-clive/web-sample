@@ -1,13 +1,7 @@
-import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Robby from '@/pages/Robby';
+import Lobby from '@/pages/Lobby';
 import Room from '@/pages/Room';
 import NotFound from '@/pages/NotFound';
 import ConnectLive from '@connectlive/connectlive-web-sdk';
@@ -17,17 +11,17 @@ ConnectLive.logger.setLevel('off');
 const App = () => {
   return (
     <RecoilRoot>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DefaultLayout />}>
-            <Route path="/" element={<Robby />} />
-            <Route path="/room" element={<Room />} />
+          <Route path='/' element={<DefaultLayout />}>
+            <Route path='/' element={<Lobby />} />
+            <Route path='/room' element={<Room />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </RecoilRoot>
   );
-}
+};
 
 export default App;

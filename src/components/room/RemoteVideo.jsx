@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { AudioOccupants } from '@/store/audioOccupants';
 
-const RemoteVideo = ({ remoteVideo, click })=>{
+const RemoteVideo = ({ remoteVideo, click }) => {
   const ref = useRef(null);
   const [audioOccupants] = useRecoilState(AudioOccupants);
 
@@ -11,7 +11,7 @@ const RemoteVideo = ({ remoteVideo, click })=>{
       return;
     }
 
-    if(!remoteVideo) {
+    if (!remoteVideo) {
       return;
     }
 
@@ -20,14 +20,19 @@ const RemoteVideo = ({ remoteVideo, click })=>{
 
   const onClick = () => {
     click(remoteVideo);
-  }
+  };
 
   return (
     <>
-    <div className="absolute top-3 left-3">{remoteVideo.participantId}</div>
-    {
-      audioOccupants[remoteVideo.participantId] ? <video ref={ref} muted autoPlay playsInline className='border-4 border-yellow-500 rounded-md w-full h-full cursor-pointer' onClick={onClick}></video> : <video ref={ref} muted autoPlay playsInline className='border-4 border-white rounded-md w-full h-full cursor-pointer' onClick={onClick}></video>
-    }
+      <div className='absolute top-3 left-3'>{remoteVideo.participantId}</div>
+        <video
+          ref={ref}
+          muted
+          autoPlay
+          playsInline
+          className={`border-4 rounded-md w-full h-full cursor-pointer ${audioOccupants[remoteVideo.participantId] ? 'border-yellow-500' : 'border-white'}`}
+          onClick={onClick}
+        ></video>
     </>
   );
 };
