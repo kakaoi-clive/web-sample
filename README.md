@@ -32,6 +32,8 @@ npm install @connectlive/connectlive-web-sdk
 ### 화상회의 예제
 ConnectLive의 기능을 활용한 화상회의 예제입니다.
 - https://github.com/kakaoi-clive/web-sample
+- https://kakaoi-clive.github.io/web-sample/ 여기에서 위 예제를 바로 확인해 볼 수 있습니다.
+
 
 # 문서 및 링크
 - https://docs.kakaoi.ai/connect_live/
