@@ -26,8 +26,8 @@ npm install @connectlive/connectlive-web-sdk
 
 # 예제
 ### 온라인 예제
-바로 실행해 볼 수 있는 예제를 제공하고 있습니다.
-- 해당 예제는 추후 업데이트 될 예정입니다.
+온라인 IDE에서 간단한 예제를 바로 실행해 볼 수 있습니다.
+-  https://sample.connectlive.kakaoi.ai
 
 ### 화상회의 예제
 ConnectLive의 기능을 활용한 화상회의 예제입니다.
