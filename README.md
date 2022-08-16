@@ -256,7 +256,7 @@ room.getRemoteAudioLevels();
 {
     remoteParticipants: [{
         remoteParticipant: RemoteParticipant,
-        level: 0.00630957344480193
+        level: 20
     }]
 }
 */
