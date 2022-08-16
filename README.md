@@ -21,7 +21,7 @@ npm install @connectlive/connectlive-web-sdk
 <script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk/dist/connectlive-web-sdk.min.js"></script>
 
 //특정버전
-<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk@2.1.0/dist/connectlive-web-sdk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@connectlive/connectlive-web-sdk@x.x.x/dist/connectlive-web-sdk.min.js"></script>
 ```
 
 # 예제
