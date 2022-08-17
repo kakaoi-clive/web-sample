@@ -263,8 +263,7 @@ room.getRemoteAudioLevels();
 ```
 
 ### **수신 중인 비디오의 품질 변경하기**
-리모트 비디오 객체에는 setQuality라는 메소드를 제공하고 있습니다. 해당 메소드는 인자로 “l”, “m”, “h”라는 인자 중 하나를 받습니다. 각각 low, middle, high를 뜻합니다. 
-high는 하나만 유지됩니다. 만약 A, B 비디오를 순서대로 high 지정했다면 마지막으로 지정한 B만 high로 설정됩니다.
+리모트 비디오 객체에는 setQuality라는 메소드를 제공하고 있습니다. 해당 메소드는 인자로 “l”, “m”, “h”라는 인자 중 하나를 받습니다. 각각 low, middle, high를 뜻합니다.
 
 ```
 const remoteVideo = remoteParticipant.getVideo(‘비디오 아이디’)
