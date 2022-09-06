@@ -10,8 +10,7 @@ const Settings = ({}) => {
 
   const [type, setType] = useState(serviceInfo.type);
   const [internalServiceId, setInternalServiceId] = useState(serviceInfo.internal.serviceId);
-  const [internalServiceKey, setInternalServiceKey] = useState(serviceInfo.internal.serviceKey);
-  const [internalSecret, setInternalSecret] = useState(serviceInfo.internal.secret);
+  const [internalServiceSecret, setInternalServiceSecret] = useState(serviceInfo.internal.serviceSecret);
   const [internalEndpoint, setInternalEndpoint] = useState(serviceInfo.internal.endpoint);
 
   const [externalServiceId, setExternalServiceId] = useState(serviceInfo.external.serviceId);
@@ -23,8 +22,7 @@ const Settings = ({}) => {
       type: type,
       internal: {
         serviceId: internalServiceId,
-        serviceKey: internalServiceKey,
-        secret: internalSecret,
+        serviceSecret: internalServiceSecret,
         endpoint: internalEndpoint,
       },
       external: {
@@ -115,26 +113,14 @@ const Settings = ({}) => {
                         />
                       </div>
                       <div className='col-span-6 sm:col-span-3 mb-6'>
-                        <label className='block text-sm font-medium'>Service Key</label>
+                        <label className='block text-sm font-medium'>Service Secret</label>
                         <input
                           type='text'
                           className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white text-black rounded-md shadow-sm sm:text-sm'
                           required
-                          value={internalServiceKey}
+                          value={internalServiceSecret}
                           onChange={({ target: { value } }) => {
-                            setInternalServiceKey(value);
-                          }}
-                        />
-                      </div>
-                      <div className='col-span-6 sm:col-span-3 mb-6'>
-                        <label className='block text-sm font-medium'>Secret</label>
-                        <input
-                          type='text'
-                          className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white text-black rounded-md shadow-sm sm:text-sm'
-                          required
-                          value={internalSecret}
-                          onChange={({ target: { value } }) => {
-                            setInternalSecret(value);
+                            setInternalServiceSecret(value);
                           }}
                         />
                       </div>

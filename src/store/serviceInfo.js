@@ -21,8 +21,7 @@ export const ServiceInfo = atom({
     type: 'internal',
     internal: {
       serviceId: 'ICLEXMPLPUBL',
-      serviceKey: 'ICLEXMPLPUBL0KEY',
-      secret: 'YOUR0SRVC0SECRET',
+      serviceSecret: 'ICLEXMPLPUBL0KEY:YOUR0SRVC0SECRET',
       endpoint: '',
     },
     external: {

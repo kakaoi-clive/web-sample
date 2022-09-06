@@ -37,8 +37,6 @@ const Lobby = () => {
 
   const navigate = useNavigate();
 
-  ConnectLive.logger.setLevel('trace');
-
   useEffect(() => {
     (async () => {
       const _localMedia = await ConnectLive.createLocalMedia({
@@ -55,8 +53,7 @@ const Lobby = () => {
     if (
       serviceInfo.type === 'internal' &&
       serviceInfo.internal.serviceId &&
-      serviceInfo.internal.serviceKey &&
-      serviceInfo.internal.secret
+      serviceInfo.internal.serviceSecret
     ) {
       auth = serviceInfo.internal;
     } else if (

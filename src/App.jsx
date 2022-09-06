@@ -4,9 +4,6 @@ import DefaultLayout from '@/layouts/DefaultLayout';
 import Lobby from '@/pages/Lobby';
 import Room from '@/pages/Room';
 import NotFound from '@/pages/NotFound';
-import ConnectLive from '@connectlive/connectlive-web-sdk';
-
-ConnectLive.logger.setLevel('off');
 
 const App = () => {
   return (
