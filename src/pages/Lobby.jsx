@@ -92,7 +92,7 @@ const Lobby = () => {
 
   return (
     <div className='flex justify-center items-center h-full'>
-      <div className='max-w-sm rounded overflow-hidden shadow-lg'>
+      <div className='p-6 max-w-sm rounded overflow-hidden shadow-lg'>
         <div className='relative'>
           <LocalVideo localMedia={localMedia} activeCamera={activeCamera} />
           <div className='absolute m-auto left-0 right-0 bottom-0 h-10 w-20 flex place-content-between'>
