@@ -384,8 +384,7 @@ Connectlive 에러 객체는 두가지 타입으로 나눠집니다. ServerError
 try{
     await ConnectLive.signIn({
         serviceId: '서비스아이디',
-        serviceKey: '서비스키',
-        secret: '시크릿키',
+        serviceSecret: '서비스키:시크릿',
     });
 } catch (err) {
     //에러 처리
