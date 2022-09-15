@@ -4,6 +4,7 @@ import ConnectLive from '@connectlive/connectlive-web-sdk';
 import Header from '../components/room/Header';
 import Sidebar from '../components/room/Sidebar';
 import RemoteVideo from '../components/room/RemoteVideo';
+import Chat from '../components/room/Chat';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CameraDeviceId } from '@/store/cameraDevice';
@@ -255,10 +256,10 @@ const Room = () => {
       />
 
       {/* Content area */}
-      <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
+      <div className='relative flex flex-col flex-1'>
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <main>
+        <main className='relative flex h-full'>
           <div className='px-8 py-8 w-full'>
             <div className='text-right'>
               <select
@@ -287,7 +288,9 @@ const Room = () => {
             </div>
           </div>
         </main>
+        
       </div>
+      <Chat />
     </div>
   );
 };
