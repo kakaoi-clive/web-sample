@@ -290,7 +290,8 @@ const Room = () => {
         </main>
         
       </div>
-      <Chat />
+      <Chat 
+        remoteParticipants={remoteParticipants} />
     </div>
   );
 };

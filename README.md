@@ -453,4 +453,4 @@ room.on('error', ()=>{
 | remoteVideoStateChanged | remoteParticipant: RemoteParticipant, remoteVideo: RemoteVideo | 다른 참여자의 비디오 상태 곧 enabled 상태가 변경되면 호출됩니다. enabled을 false로 설정할 경우, 비디오를 잠시 mute 결과를 얻을 수 있습니다. LocalVideo의 setEnabled 메소드로 이를 설정할 수 있습니다. |
 | disconnected | reason | 컨퍼런스 룸에서 정상적으로 나오면 호출되는 이벤트. reason이 'disconnected'인 경우 정상 종료. 'destroyed'인 경우 강제 종료. 'kicked'인 경우 강제 퇴장입니다. |
 | error | 에러(ServerError, ClientError) | 최종 연결이 실패했을 경우, 호출됩니다. 해당 에러 이벤트에서 초기화면으로 이동한다든가 하는 행위가 필요합니다. |
-| userMessage | sender: RemoteParticipantId, message: string |  |
+| userMessage | sender: RemoteParticipantId, message: string, type: string |  |
