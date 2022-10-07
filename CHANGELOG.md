@@ -1,3 +1,10 @@
+# 2.2.2
+1. **[fix]** 내부에서 사용되던 로그 레벨 초기화 버그가 수정되었습니다.
+2. `getStats` : **[remove]** 기존 webrtc stats 정보를 제공하던 getStats()가 삭제되었습니다. 대신 getLocalStats, getRemoteStats이 추가 되었습니다.
+3. `getLocalStats` : **[add]** 송신시의 미디어와 네트워크에 관한 정보를 담고있는 webrtc stats를 반환합니다. 이는 webrtc stats의 모든 정보를 담고 있습니다.
+4. `getRemoteStats` : **[add]** 수신시의 미디어와 네트워크에 관한 정보를 담고있는 webrtc stats를 반환합니다. 이는 webrtc stats의 모든 정보를 담고 있습니다.
+5. `stat 이벤트 추가` : **[add]** on('stat') 으로 정의 가능한 이벤트가 추가되었습니다. 해당 이벤트는 1초에 한번씩 현재 송수신 품질에 대한 정보를 반환받습니다. getLocalStats나 getRemoteStats와 달리 품질을 판단할 수 있는 몇가지의 대표 값들만을 반환합니다.
+
 # 2.2.1
 1. `sendUserMessage(targets, message, type)` : **[refactor]** 마지막 인자로 type이 추가되었습니다. type을 명시할 경우 메시지의 성격을 정의할 수 있습니다. 예를 들어, 공지사항의 경우 type을 notice와 같이 설정할 수 있습니다. 만약 type을 생략할 경우 기본 normal이 설정됩니다. 
 2. `userMessage 이벤트` : **[refactor]** sendUserMessage가 변경됨에 따라 userMessage 이벤트에 전달되어지는 인자도 변경되었습니다. 기존 인자로 전달되는 객체에 type이 추가되었습니다.
