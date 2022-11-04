@@ -1,3 +1,12 @@
+# 2.2.3
+1. `createLocalScreen` : **[refactor]** 화면 공유용 스트림은 기본으로 HD 모드가 적용되었습니다. 이는 더 높은 비트레이트를 사용합니다.
+2. `수신비디오 품질 조정` :  **[change]** 비디오 수신시 기본 품질이 low에서 middle로 변경되었습니다.
+3. `stat 이벤트`
+ - createRoom에 stat 이벤트 호출 간격을 조정할 수 있는 statInterval 옵션이 추가되었습니다. 기본값 5000(5초)
+ - 기존 PerSecond 항목이 PerInterval으로 변경되었습니다.
+ - 기존 availableOutgoingBitrate, availableIncomingBitrate은 삭제되었습니다.
+ - frameWidth, frameHeight, framesPerSecond, bytesSentPerInterval, packetsSentPerInterval, bytesReceivedPerInterval, currentRTT가 추가되었습니다.
+
 # 2.2.2
 1. **[fix]** 내부에서 사용되던 로그 레벨 초기화 버그가 수정되었습니다.
 2. `getStats` : **[remove]** 기존 webrtc stats 정보를 제공하던 getStats()가 삭제되었습니다. 대신 getLocalStats, getRemoteStats이 추가 되었습니다.
