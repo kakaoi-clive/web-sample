@@ -1,7 +1,7 @@
 # 2.2.4
 1. **[fix]** 어드민 API로 참여자의 강제 추방할 수 있는 Kick에 관한 버그가 픽스되었습니다.
 2. **[fix]** 내부에서 사용되던 로그에 서비스 아이디가 추가되었습니다.
-3. `weight` : **[add]** LocalVideo에 weight 속성이 추가되었고 setWeight를 통해 0~9까지 값을 할당 할 수 있도록 되었습니다. 또, RemoteVideo는 getWeight로 해당 값을 가져올 수 있습니다. weight는 서비스에서 비디오의 중요도를 표시할 수 있습니다. 
+3. `weight` : **[add]** LocalVideo에 weight 속성이 추가되었고 setWeight를 통해 0~9까지 값을 할당 할 수 있도록 되었습니다. 또, RemoteVideo는 getWeight로 해당 값을 가져올 수 있습니다. weight는 서비스에서 비디오의 중요도를 표시할 수 있습니다. 이는 통합 녹화에 활용될 예정입니다.
 
 # 2.2.3
 1. `createLocalScreen` : **[refactor]** 화면 공유용 스트림은 기본으로 HD 모드가 적용되었습니다. 이는 더 높은 비트레이트를 사용합니다.
