@@ -3,7 +3,10 @@
 2. **[delete]** 실험적으로 추가했던 onStat 이벤트를 삭제했습니다.
 3. **[add]** getLocalStats, getRemoteStats가 반환하는 webrtc stats 정보에 참여자 아이디 등의 서비스 정보가 추가되었습니다.
 4. `weight` : **[delete]** 이전 버전에 추가되었던 weight가 삭제 되었습니다. 대신 sort가 추가되었습니다.
-5. `sort` : **[add]** weight 대신 sort가 추가되었습니다. setSort({ weight, mode }) 와 같이 사용되며 weight는 기존과 같으며 mode는 비디오의 레이아웃(crop, fill, cover 등)을 표시하는 문자열을 자유롭게 입력할 수 있습니다. mode는 추후에 활용될 예정이며 weight는 통합 녹화에 사용될 예정입니다.
+5. `sort` : **[add]** weight 대신 sort가 추가되었습니다. setSort({ weight, mode }) 와 같이 사용되며 weight는 기존과 같으며 mode는 비디오의 레이아웃(crop, fit, stretch) 중 하나를 입력 입력할 수 있습니다. mode는 weight와 함께 통합 녹화에 사용됩니다. 
+- crop : 가급적 비디오의 크기를 표현되는 영역에 맞춥니다. 비율이 유지되기에 비디오가 잘릴 수 있습니다.
+- fit : 비디오의 비율을 유지하며 레터 박스가 나타날 수 있습니다.
+- stretch : 비디오의 비율이 왜곡됩니다.
 
 # 2.2.4
 1. **[fix]** 어드민 API로 참여자의 강제 추방할 수 있는 Kick에 관한 버그가 픽스되었습니다.
